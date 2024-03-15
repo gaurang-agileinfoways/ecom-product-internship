@@ -8,7 +8,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(Users.name) private userSchema: Model<Users>) {}
+  constructor(@InjectModel(Users.name) private userSchema: Model<Users>) { }
 
   async create(createUserDto: CreateUserDto) {
     const encryptedPass = await bcrypt.hash(
@@ -23,8 +23,9 @@ export class UserService {
     return await this.userSchema.find();
   }
 
-  async findOne(id: string) {
-    const user = await this.userSchema.findById(id);
+  async findOne(_id: string) {
+    const user = await this.userSchema.findById(_id).exec();
+    console.log(user);
     if (user) return user;
     else throw new NotFoundException('user not found.');
   }

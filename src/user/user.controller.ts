@@ -51,11 +51,11 @@ export class UserController {
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Get('user/:id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return new ResponseDto(
       'user retrieved successfully.',
       HttpStatus.OK,
-      this.userService.findOne(id),
+      await this.userService.findOne(id),
     );
   }
 
@@ -63,11 +63,11 @@ export class UserController {
   @ApiBody({ type: UpdateUserDto })
   @UseGuards(AuthGuard)
   @Put('')
-  update(@Query('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async update(@Query('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return new ResponseDto(
       'user updated successfully.',
       HttpStatus.OK,
-      this.userService.update(id, updateUserDto),
+      await this.userService.update(id, updateUserDto),
     );
   }
 

@@ -15,7 +15,7 @@ import { ProductsModule } from './products/products.module';
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/nest'),
     ConfigModule.forRoot({
-      envFilePath: './dev.env',
+      envFilePath: './.env.development.local',
       isGlobal: true,
     }),
     JwtModule.register({
